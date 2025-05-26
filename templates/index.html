@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Países del Mundo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Países del Mundo 🌎</h1>
+    <div id="countries"></div>
+
+    <script>
+        fetch('/api/countries')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('countries');
+                data.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'country';
+                    div.innerHTML = `<strong>${c.name}</strong><br>Capital: ${c.capital}<br>Región: ${c.region}`;
+                    container.appendChild(div);
+                });
+            });
+    </script>
+</body>
+</html>
